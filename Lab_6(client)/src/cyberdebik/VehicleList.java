@@ -12,15 +12,10 @@ public class VehicleList {
 
 	Message message = new Message("", "");
 
-	/**
-	 * Метод для проверки и выполнения введённой команды
-	 *
-	 * @throws Exception если что-то пойдет не так
-	 */
-	public Message commandChoose() throws Exception {
-		System.out.print("\nВведите команду: ");
-		String command = new Scanner(System.in).nextLine();
-		HashMap<String, Command> commandMap = new HashMap<>();
+	private HashMap<String, Command> commandMap = new HashMap<>();
+
+
+	public VehicleList() {
 		commandMap.put("HELP", new Help());
 		commandMap.put("INFO", new Info());
 		commandMap.put("SHOW", new Show());
@@ -36,6 +31,16 @@ public class VehicleList {
 		commandMap.put("FILTER_GREATER_THAN_TYPE", new Filter_greater_than_type());
 		commandMap.put("PRINT_FIELD_ASCENDING_NUMBER_OF_WHEELS", new Print_field_ascending_number_of_wheels());
 		commandMap.put("EXECUTE_SCRIPT", new Execute_script());
+	}
+
+	/**
+	 * Метод для проверки и выполнения введённой команды
+	 *
+	 * @throws Exception если что-то пойдет не так
+	 */
+	public Message commandChoose() throws Exception {
+		System.out.print("\nВведите команду: ");
+		String command = new Scanner(System.in).nextLine();
 		String[] strings = command.split(" ");
 		command = strings[0].trim().toUpperCase();
 		String data = "";
