@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class CSV {
 
 	public static void read(VehicleList vehicleList) {
-		File file = new File(System.getenv("COLLECTION"));
-//		File file = new File("src/cyberdebik/Vehicles.csv");
+//		File file = new File(System.getenv("COLLECTION"));
+		File file = new File("src/cyberdebik/Vehicles.csv");
 		try {
 			Scanner reader = new Scanner(file);
 			String line;

@@ -17,8 +17,8 @@ public class Save extends Command {
 	 */
 	@Override
 	public void execute(VehicleList vehicleList, String data) {
-		File file = new File(System.getenv("COLLECTION"));
-//		File file = new File("src/cyberdebik/Vehicles.csv");
+//		File file = new File(System.getenv("COLLECTION"));
+		File file = new File("src/cyberdebik/Vehicles.csv");
 		try {
 			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 			for (Vehicle vehicle : vehicleList.vehicles) {

@@ -12,7 +12,6 @@ public class Postman {
 
 	public static Logger log = Logger.getGlobal();
 	static ByteBuffer buffer = ByteBuffer.allocate(1024);
-//	static String result = "";
 
 	public static String readClient(SelectionKey selectionKey) throws IOException, ClassNotFoundException {
 		SocketChannel channel = (SocketChannel) selectionKey.channel();
@@ -20,17 +19,11 @@ public class Postman {
 		buffer.flip();
 		buffer.clear();
 		byte[] bytes = buffer.array();
-		Message message = deserialize(bytes);
-		log.info("Сервер получил сообщение = " + message.getCommand() + ";" + message.getData() + " от " + channel.getLocalAddress() + ".\n");
-		return message.getCommand() + " " + message.getData();
-//		return result;
-	}
-
-	public static Message deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
 		ByteArrayInputStream b = new ByteArrayInputStream(bytes);
 		ObjectInputStream objectInputStream = new ObjectInputStream(b);
 		Message message = (Message) objectInputStream.readObject();
-		return message;
+		log.info("Сервер получил сообщение = " + message.getCommand() + ";" + message.getData() + " от " + channel.getLocalAddress() + ".\n");
+		return message.getCommand() + " " + message.getData();
 	}
 
 	public static void sendToClient(SelectionKey selectionKey, String answer) throws IOException {

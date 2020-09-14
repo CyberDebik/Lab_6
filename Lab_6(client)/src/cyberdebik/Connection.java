@@ -8,14 +8,6 @@ public class Connection {
 	public static int PORT = 8000;
 	public static String HOST = "localhost";
 
-	public static byte[] serialize(Message message) throws IOException {
-		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-		ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
-		objectStream.writeObject(message);
-		objectStream.flush();
-		return byteStream.toByteArray();
-	}
-
 	public static void connect() throws Exception {
 		while (true) {
 			try (Socket client = new Socket(HOST, PORT)) {
@@ -48,7 +40,11 @@ public class Connection {
 
 	public static void sendMessage(Message message, Socket socket) throws IOException {
 		OutputStream sender = socket.getOutputStream();
-		sender.write(serialize(message));
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+		objectOutputStream.writeObject(message);
+		objectOutputStream.flush();
+		sender.write(byteArrayOutputStream.toByteArray());
 	}
 
 	public static void getAnswer(Socket socket) throws Exception {

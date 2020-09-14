@@ -35,8 +35,7 @@ public class Main_Server {
 	public static void connect() throws Exception {
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		Selector selector = Selector.open();
-		InetSocketAddress address = new InetSocketAddress(PORT);
-		serverSocketChannel.bind(address);
+		serverSocketChannel.bind(new InetSocketAddress(PORT));
 		serverSocketChannel.configureBlocking(false);
 		serverSocketChannel.register(selector, serverSocketChannel.validOps());
 		while (running) {
